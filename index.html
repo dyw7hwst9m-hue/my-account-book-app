@@ -987,16 +987,160 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+/* ============================
+   THEME SYSTEM
+============================ */
+
+const THEME_KEY = "myAccountBookTheme";
+
+function toggleThemePicker(){
+
+    const box = document.getElementById("themePickerBox");
+
+    if(!box) return;
+
+    box.classList.toggle("show");
+}
+
+
+function setTheme(theme){
+
+    document.body.setAttribute("data-theme", theme);
+
+    localStorage.setItem(THEME_KEY, theme);
+
+    const box = document.getElementById("themePickerBox");
+
+    if(box){
+        box.classList.remove("show");
+    }
+}
+
+
+function loadTheme(){
+
+    const savedTheme =
+        localStorage.getItem(THEME_KEY) || "pink";
+
+    document.body.setAttribute(
+        "data-theme",
+        savedTheme
+    );
+}
+
+
+loadTheme();
 </script>
   
 <body>
 
 <div class="app">
+<!-- ============================
+     THEME PICKER
+============================ -->
+<div class="theme-picker">
 
+    <button class="theme-button" onclick="toggleThemePicker()">
+        🎨 <span>ธีมสี</span>
+    </button>
+
+    <div id="themePickerBox" class="theme-picker-box">
+
+        <div class="theme-title">
+            เลือกธีมสี
+        </div>
+
+        <div class="theme-options">
+
+            <button class="theme-option pink"
+                    onclick="setTheme('pink')">
+                🌸
+                <span>ชมพู</span>
+            </button>
+
+            <button class="theme-option purple"
+                    onclick="setTheme('purple')">
+                💜
+                <span>ม่วง</span>
+            </button>
+
+            <button class="theme-option blue"
+                    onclick="setTheme('blue')">
+                💙
+                <span>ฟ้า</span>
+            </button>
+
+            <button class="theme-option green"
+                    onclick="setTheme('green')">
+                💚
+                <span>เขียว</span>
+            </button>
+
+            <button class="theme-option orange"
+                    onclick="setTheme('orange')">
+                🧡
+                <span>ส้ม</span>
+            </button>
+
+            <button class="theme-option brown"
+                    onclick="setTheme('brown')">
+                🤎
+                <span>น้ำตาล</span>
+            </button>
+
+            <button class="theme-option black"
+                    onclick="setTheme('black')">
+                🖤
+                <span>ดำ</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 <!-- =========================
      NAV
 ========================= -->
+<div class="theme-box">
 
+  <button class="theme-btn" onclick="toggleThemeMenu()">
+    🎨 เปลี่ยนธีม
+  </button>
+
+  <div class="theme-menu" id="themeMenu">
+
+    <button onclick="setTheme('pink')">
+      🌸 ชมพู
+    </button>
+
+    <button onclick="setTheme('purple')">
+      💜 ม่วง
+    </button>
+
+    <button onclick="setTheme('blue')">
+      💙 ฟ้า
+    </button>
+
+    <button onclick="setTheme('green')">
+      💚 เขียว
+    </button>
+
+    <button onclick="setTheme('orange')">
+      🧡 ส้ม
+    </button>
+
+    <button onclick="setTheme('brown')">
+      🤎 น้ำตาล
+    </button>
+
+    <button onclick="setTheme('black')">
+      🖤 ดำ
+    </button>
+
+  </div>
+
+</div>
 <div class="nav">
 
   <button class="on" data-page="account">

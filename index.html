@@ -2328,11 +2328,13 @@ document.querySelectorAll(".nav button")
     .forEach(page=>page.classList.remove("on"));
 
     const page =
-      document.getElementById(
-        button.dataset.page
-      );
+  document.getElementById(
+    button.dataset.page
+  );
 
-    page.classList.add("on");
+if(page){
+  page.classList.add("on");
+}
 
     if(button.dataset.page==="account"){
       renderAccounts();

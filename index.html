@@ -392,15 +392,15 @@ select:focus{
   border:0;
   border-radius:14px;
   overflow:hidden;
-  background:#f8f0f5;
+  background:var(--soft);
 }
 
 .qty button{
   width:38px;
   height:40px;
   border:0;
-  background:#f8f0f5;
-  color:#168cff;
+  background:var(--soft);
+  color:var(--blue);
   font-weight:900;
   font-size:20px;
 }
@@ -410,7 +410,8 @@ select:focus{
   height:40px;
   border:0;
   border-radius:0;
-  background:#f8f0f5;
+  background:var(--soft);
+  color:var(--ink);
   text-align:center;
   padding:7px;
   font-size:18px;
@@ -446,7 +447,7 @@ select:focus{
   display:grid;
   place-items:center;
   border-radius:17px;
-  background:#fff0f6;
+  background:var(--pink2);
   font-size:27px;
 }
 
@@ -456,7 +457,7 @@ select:focus{
 }
 
 .account-formula{
-  color:#aaa4a9;
+  color:var(--muted);
   font-size:15px;
   margin-top:3px;
 }
@@ -484,9 +485,9 @@ select:focus{
 }
 
 .account-edit{
-  border:1px solid #eadfe6;
-  background:#fff;
-  color:#168cff;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--blue);
   border-radius:11px;
   padding:5px 9px;
   font-size:12px;
@@ -494,8 +495,8 @@ select:focus{
 
 .account-delete{
   border:0;
-  background:#fff0f3;
-  color:#dc7880;
+  background:var(--soft);
+  color:var(--red);
   border-radius:50%;
   width:32px;
   height:32px;
@@ -520,15 +521,15 @@ select:focus{
 .summary-tabs button{
   border:0;
   border-radius:15px;
-  background:#f7edf3;
-  color:#987d8c;
+  background:var(--soft);
+  color:var(--muted);
   padding:12px 8px;
   font-weight:700;
 }
 
 .summary-tabs button.on{
-  background:#f5d8e7;
-  color:#bb5d87;
+  background:var(--pink2);
+  color:var(--pink);
 }
 
 .detail-tabs{
@@ -539,16 +540,16 @@ select:focus{
 
 .detail-tabs button{
   border:1px solid var(--line);
-  background:#fff;
-  color:#8d7883;
+  background:var(--card);
+  color:var(--muted);
   border-radius:14px;
   padding:9px 15px;
 }
 
 .detail-tabs button.on{
-  background:#f8dce9;
-  color:#b85c84;
-  border-color:#efc8da;
+  background:var(--pink2);
+  color:var(--pink);
+  border-color:var(--line);
 }
 
 .month-picker{
@@ -559,9 +560,9 @@ select:focus{
 
 .week-label{
   padding:10px 13px;
-  background:#fdf0f6;
+  background:var(--soft);
   border-radius:14px;
-  color:#9d7889;
+  color:var(--muted);
   margin-top:9px;
   font-size:13px;
 }
@@ -579,26 +580,26 @@ select:focus{
 }
 
 .summary-group{
-  border:1px solid #ead9e3;
+  border:1px solid var(--line);
   border-radius:20px;
   overflow:hidden;
   margin-bottom:22px;
-  background:#fff;
+  background:var(--card);
 }
 
 .summary-group-head{
-  background:#fbe7f0;
+  background:var(--pink2);
   padding:13px 17px;
   display:flex;
   justify-content:space-between;
   gap:10px;
   align-items:center;
-  color:#b25a82;
+  color:var(--pink);
   font-weight:800;
 }
 
 .summary-group-total{
-  color:#9c7d8b;
+  color:var(--muted);
   font-size:13px;
   font-weight:600;
 }
@@ -621,7 +622,7 @@ select:focus{
 }
 
 .summary-row-sub{
-  color:#aaa4a9;
+  color:var(--muted);
   font-size:14px;
   margin-top:3px;
 }
@@ -677,7 +678,7 @@ select:focus{
 .cost-total{
   font-size:21px;
   font-weight:900;
-  color:#4d7f96;
+  color:var(--pink);
 }
 
 .cost-count{
@@ -699,7 +700,7 @@ select:focus{
   display:grid;
   place-items:center;
   border-radius:17px;
-  background:#fdf0f6;
+  background:var(--pink2);
   font-size:30px;
   margin-bottom:7px;
 }
@@ -719,7 +720,7 @@ select:focus{
   border:1px solid var(--line);
   border-radius:20px;
   padding:14px;
-  background:#fff;
+  background:var(--card);
 }
 
 .ingredient-line{
@@ -741,7 +742,7 @@ select:focus{
 }
 
 .ingredient-equation{
-  color:#aaa4a9;
+  color:var(--muted);
   font-size:14px;
   margin-top:5px;
 }
@@ -759,8 +760,8 @@ select:focus{
   height:35px;
   border:0;
   border-radius:10px;
-  background:#f5eef3;
-  color:#168cff;
+  background:var(--soft);
+  color:var(--blue);
   font-size:20px;
   line-height:35px;
   padding:0;
@@ -770,8 +771,8 @@ select:focus{
   height:35px;
   border:0;
   border-radius:10px;
-  background:#f5eef3;
-  color:#806c77;
+  background:var(--soft);
+  color:var(--muted);
   padding:0 10px;
   font-size:12px;
   white-space:nowrap;
@@ -782,7 +783,8 @@ select:focus{
   height:35px;
   border:0;
   border-radius:10px;
-  background:#fff0f3;
+  background:var(--soft);
+  color:var(--red);
   font-size:16px;
 }
 
@@ -791,15 +793,15 @@ select:focus{
   align-items:center;
   border-radius:10px;
   overflow:hidden;
-  background:#f5eef3;
+  background:var(--soft);
 }
 
 .ing-qty button{
   width:35px;
   height:35px;
   border:0;
-  background:#f5eef3;
-  color:#168cff;
+  background:var(--soft);
+  color:var(--blue);
   font-size:19px;
   padding:0;
 }
@@ -809,7 +811,8 @@ select:focus{
   height:35px;
   border:0;
   border-radius:0;
-  background:#f5eef3;
+  background:var(--soft);
+  color:var(--ink);
   text-align:center;
   padding:4px;
   font-size:15px;
@@ -832,7 +835,7 @@ select:focus{
   position:absolute;
   inset:0;
   border-radius:30px;
-  background:#ddd5da;
+  background:var(--line);
 }
 
 .slider:before{
@@ -843,13 +846,13 @@ select:focus{
   left:4px;
   top:4px;
   border-radius:50%;
-  background:#fff;
+  background:var(--card);
   transition:.2s;
   box-shadow:0 2px 5px rgba(119,119,119,.25);
 }
 
 .switch input:checked+.slider{
-  background:#69ad89;
+  background:var(--green);
 }
 
 .switch input:checked+.slider:before{
@@ -879,7 +882,8 @@ select:focus{
   width:min(600px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#fff;
+  background:var(--card);
+  color:var(--ink);
   border-radius:27px;
   padding:22px;
   box-shadow:0 20px 60px rgba(50,30,40,.18);
@@ -1099,14 +1103,15 @@ function toggleThemeMenu(){
 function setTheme(theme){
 
   const allowedThemes = [
-    "pink",
-    "purple",
-    "blue",
-    "green",
-    "orange",
-    "brown",
-    "black"
-  ];
+  "pink",
+  "purple",
+  "blue",
+  "green",
+  "orange",
+  "yellow",
+  "brown",
+  "black"
+];
 
   if(!allowedThemes.includes(theme)){
     theme = "pink";
@@ -1146,7 +1151,7 @@ document.addEventListener("DOMContentLoaded", function(){
 ============================ -->
 <div class="theme-picker">
 
-    <button class="theme-button" onclick="toggleThemePicker()">
+    <button class="theme-button" onclick="toggleThemeMenu()">
         🎨 <span>ธีมสี</span>
     </button>
 
@@ -1186,6 +1191,11 @@ document.addEventListener("DOMContentLoaded", function(){
                     onclick="setTheme('orange')">
                 🧡
                 <span>ส้ม</span>
+            </button>
+          <button class="theme-option yellow"
+        onclick="setTheme('yellow')">
+                💛
+                <span>เหลือง</span>
             </button>
 
             <button class="theme-option brown"

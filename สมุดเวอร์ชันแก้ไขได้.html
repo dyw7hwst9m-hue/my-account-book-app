@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fffafc">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="สมุดบัญชี">
+<link rel="manifest" href="manifest.json">
+<title>สมุดบัญชี</title>
+<style>
+:root{--bg:#fff8fb;--card:#fff;--ink:#2b2730;--muted:#8b848d;--line:#eee6eb;--accent:#e9a8c1;--accent2:#f7d9e5;--green:#5da87a;--red:#d96c72}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Thai",system-ui,sans-serif}
+.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:78px}
+header{padding:22px 18px 10px;display:flex;justify-content:space-between;align-items:center}
+h1{font-size:25px;margin:0;font-weight:800}.small{font-size:13px;color:var(--muted)}
+.iconbtn{border:0;background:#fff;border-radius:14px;width:42px;height:42px;font-size:19px;box-shadow:0 3px 12px #eadde3}
+main{padding:0 14px}
+.hero{background:linear-gradient(135deg,#fff,#fdeaf2);border:1px solid #f2dce5;border-radius:24px;padding:18px;margin:8px 0 14px;box-shadow:0 8px 25px #ecdde4}
+.hero .label{font-size:13px;color:var(--muted)}.balance{font-size:34px;font-weight:850;margin:4px 0 15px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#fff;border-radius:17px;padding:12px}.stat span{display:block;color:var(--muted);font-size:12px}.stat b{font-size:18px}.income b{color:var(--green)}.expense b{color:var(--red)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px}.action{border:0;border-radius:18px;padding:14px;font-size:16px;font-weight:750}.add-in{background:#e8f6ed;color:#377a51}.add-out{background:#fff0f1;color:#b64f56}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:15px 2px 9px}.section-title h2{font-size:17px;margin:0}.link{border:0;background:none;color:#bb7190}
+.entries{display:flex;flex-direction:column;gap:9px}.entry{background:#fff;border:1px solid var(--line);border-radius:17px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.entry .name{font-weight:700}.entry-actions{display:flex;align-items:center;gap:8px}.editbtn{border:0;background:#fff4f8;color:#b76688;border-radius:10px;padding:7px 9px;font-size:13px}.entry .meta{font-size:12px;color:var(--muted);margin-top:3px}.amount{font-weight:800}.plus{color:var(--green)}.minus{color:var(--red)}
+.empty{text-align:center;padding:30px;color:var(--muted);background:#fff;border:1px dashed #ddd0d7;border-radius:17px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fffdfebf;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}
+.navin{width:min(720px,100%);display:grid;grid-template-columns:repeat(3,1fr);padding:8px 12px env(safe-area-inset-bottom)}
+nav button{border:0;background:none;padding:8px 4px;color:var(--muted);font-size:12px}nav button.active{color:#b76688;font-weight:800}nav .ico{font-size:21px;display:block}
+.sheet{position:fixed;inset:0;background:#0005;display:none;align-items:flex-end;z-index:10}.sheet.show{display:flex}
+.panel{width:100%;max-width:720px;margin:auto;background:#fff;border-radius:26px 26px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -10px 35px #0002}
+.panel h3{margin:0 0 14px;font-size:20px}.field{margin:10px 0}.field label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}.field input{width:100%;padding:13px;border:1px solid #e6dce1;border-radius:13px;font-size:16px;outline:none}.save{width:100%;border:0;border-radius:14px;background:#e9a8c1;color:#fff;padding:14px;font-size:16px;font-weight:800;margin-top:8px}.cancel{width:100%;border:0;background:none;padding:12px;color:var(--muted)}
+.table-wrap{overflow:auto;background:#fff;border-radius:18px;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:850px}th,td{border:1px solid #eee;text-align:center;padding:8px;font-size:13px}th{background:#fff8fb}td input{border:0;outline:0;width:100%;text-align:center;background:transparent;padding:5px}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div><h1>📒 สมุดบัญชี</h1><div class="small">รายรับ–รายจ่ายของเรา</div></div><button class="iconbtn" onclick="openAdd('in')">＋</button></header>
+<main>
+<section class="hero">
+<div class="label">คงเหลือทั้งหมด</div><div class="balance" id="balance">฿0.00</div>
+<div class="stats"><div class="stat income"><span>รายรับ</span><b id="income">฿0.00</b></div><div class="stat expense"><span>รายจ่าย</span><b id="expense">฿0.00</b></div></div>
+</section>
+<div class="actions"><button class="action add-in" onclick="openAdd('in')">＋ เพิ่มรายรับ</button><button class="action add-out" onclick="openAdd('out')">− เพิ่มรายจ่าย</button></div>
+<div class="section-title"><h2>รายการล่าสุด</h2><button class="link" onclick="showPage('table')">ดูทั้งหมด</button></div>
+<div id="entries" class="entries"></div>
+</main>
+<nav><div class="navin">
+<button class="active" id="nav-home" onclick="showPage('home')"><span class="ico">⌂</span>หน้าหลัก</button>
+<button id="nav-table" onclick="showPage('table')"><span class="ico">▤</span>สมุดบัญชี</button>
+<button id="nav-more" onclick="more()"><span class="ico">•••</span>เพิ่มเติม</button>
+</div></nav>
+</div>
+
+<div id="sheet" class="sheet" onclick="if(event.target===this)closeSheet()">
+<div class="panel">
+<h3 id="sheetTitle">เพิ่มรายรับ</h3>
+<div class="field"><label>วันที่</label><input id="fdate" type="date"></div>
+<div class="field"><label>รายการ</label><input id="fname" placeholder="เช่น ข้าวหมูทอด"></div>
+<div class="field"><label>ราคา / หน่วย</label><input id="fprice" type="number" inputmode="decimal" placeholder="0"></div>
+<div class="field"><label>จำนวน</label><input id="fqty" type="number" inputmode="decimal" placeholder="1" value="1"></div>
+<div class="field"><label>เพิ่มเติม</label><input id="fnote" placeholder="เช่น เงินสด"></div>
+<button class="save" onclick="saveEntry()">บันทึกรายการ</button><button class="cancel" onclick="closeSheet()">ยกเลิก</button>
+</div></div>
+
+<script>
+const KEY='book-app-v2'; let data=[]; let mode='in'; let editingId=null;
+const fmt=n=>'฿'+Number(n||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+function load(){try{data=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){data=[]} render()}
+function persist(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function openAdd(m){editingId=null;mode=m;document.getElementById('sheetTitle').textContent=m==='in'?'เพิ่มรายรับ':'เพิ่มรายจ่าย';document.getElementById('fdate').value=new Date().toISOString().slice(0,10);['fname','fprice','fnote'].forEach(x=>document.getElementById(x).value='');document.getElementById('fqty').value=1;document.getElementById('sheet').classList.add('show');setTimeout(()=>document.getElementById('fname').focus(),150)}
+function closeSheet(){document.getElementById('sheet').classList.remove('show')}
+function saveEntry(){
+const name=fname.value.trim(),price=+fprice.value,qty=+fqty.value||0;
+if(!name||!price||!qty)return alert('กรอกรายการ ราคา และจำนวนก่อนนะ');
+if(editingId!==null){
+  const i=data.findIndex(x=>x.id===editingId);
+  if(i!==-1)data[i]={...data[i],date:fdate.value,name,price,qty,note:fnote.value,type:mode};
+}else{
+  data.unshift({id:Date.now(),date:fdate.value,name,price,qty,note:fnote.value,type:mode});
+}
+persist();closeSheet();editingId=null
+}
+function editEntry(id){
+const x=data.find(v=>v.id===id); if(!x)return;
+editingId=id; mode=x.type;
+document.getElementById('sheetTitle').textContent=x.type==='in'?'แก้ไขรายรับ':'แก้ไขรายจ่าย';
+document.getElementById('fdate').value=x.date||'';
+document.getElementById('fname').value=x.name||'';
+document.getElementById('fprice').value=x.price;
+document.getElementById('fqty').value=x.qty;
+document.getElementById('fnote').value=x.note||'';
+document.getElementById('sheet').classList.add('show');
+setTimeout(()=>document.getElementById('fname').focus(),150);
+}
+function totals(){let inc=0,out=0;data.forEach(x=>{let v=x.price*x.qty;if(x.type==='in')inc+=v;else out+=v});return{inc,out,bal:inc-out}}
+function render(){const t=totals();income.textContent=fmt(t.inc);expense.textContent=fmt(t.out);balance.textContent=fmt(t.bal);entries.innerHTML='';if(!data.length){entries.innerHTML='<div class="empty">ยังไม่มีรายการ<br>กด “เพิ่มรายรับ” หรือ “เพิ่มรายจ่าย” ได้เลย 💗</div>';return}data.slice(0,12).forEach(x=>{
+const d=document.createElement('div');d.className='entry';
+d.innerHTML=`<div><div class="name">${esc(x.name)}</div><div class="meta">${x.date||'-'} · ${x.qty} × ${fmt(x.price)}${x.note?' · '+esc(x.note):''}</div></div><div class="entry-actions"><div class="amount ${x.type==='in'?'plus':'minus'}">${x.type==='in'?'+':'−'}${fmt(x.price*x.qty)}</div><button class="editbtn" onclick="editEntry(${x.id})">แก้ไข</button></div>`;
+entries.appendChild(d)
+})}
+function showPage(p){if(p==='table'){document.querySelector('main').innerHTML=`<section class="section-title"><h2>สมุดบัญชีทั้งหมด</h2><button class="link" onclick="location.reload()">หน้าหลัก</button></section><div class="table-wrap"><table><thead><tr><th>วันที่</th><th>รายการ</th><th>รายรับ</th><th>รายจ่าย</th><th>คงเหลือ</th><th>แก้ไข</th></tr></thead><tbody id="allrows"></tbody></table></div>`;let b=document.getElementById('allrows'),bal=0;data.slice().reverse().forEach(x=>{let v=x.price*x.qty;bal+=x.type==='in'?v:-v;let tr=document.createElement('tr');tr.innerHTML=`<td>${x.date||''}</td><td>${esc(x.name)}</td><td>${x.type==='in'?fmt(v):''}</td><td>${x.type==='out'?fmt(v):''}</td><td>${fmt(bal)}</td><td><button class="editbtn" onclick="editEntry(${x.id})">แก้ไข</button></td>`;b.appendChild(tr)});document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));nav-table.classList.add('active')}else location.reload()}
+function more(){if(confirm('ล้างรายการทั้งหมดจากเครื่องนี้ไหม?')){if(confirm('ยืนยันอีกครั้ง: ข้อมูลทั้งหมดจะถูกลบ')){data=[];persist()}}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+load();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>

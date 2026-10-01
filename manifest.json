@@ -1,0 +1,12 @@
+{
+  "name": "สมุดบัญชี",
+  "short_name": "สมุดบัญชี",
+  "description": "แอปสำหรับบันทึกรายรับ รายจ่าย และต้นทุนร้านค้า",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff7fb",
+  "theme_color": "#ca6492",
+  "orientation": "portrait-primary",
+  "lang": "th"
+}

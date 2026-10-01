@@ -1105,81 +1105,28 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
-/* ============================
-   THEME SYSTEM
-============================ */
-
-const THEME_KEY = "myAccountBookTheme";
-
-function toggleThemePicker(){
-
-    const box = document.getElementById("themePickerBox");
-
-    if(!box) return;
-
-    box.classList.toggle("show");
-}
-
-
-function setTheme(theme){
-
-    document.body.setAttribute("data-theme", theme);
-
-    localStorage.setItem(THEME_KEY, theme);
-
-    const box = document.getElementById("themePickerBox");
-
-    if(box){
-        box.classList.remove("show");
-    }
-}
-
-
-function loadTheme(){
-
-    const savedTheme =
-        localStorage.getItem(THEME_KEY) || "pink";
-
-    document.body.setAttribute(
-        "data-theme",
-        savedTheme
-    );
-}
-
-
-loadTheme();
 /* =========================
-   THEME SWITCHER
+   THEME SYSTEM
 ========================= */
 
 const THEME_KEY = "accountBookTheme";
 
-function toggleThemeMenu(){
-
-  const menu = document.getElementById("themeMenu");
-
-  if(!menu) return;
-
-  menu.classList.toggle("show");
-}
-
+const ALLOWED_THEMES = [
+  "pink",
+  "purple",
+  "orange",
+  "red",
+  "yellow",
+  "green",
+  "sky",
+  "blue",
+  "brown",
+  "black"
+];
 
 function setTheme(theme){
 
-  const allowedThemes = [
-    "pink",
-    "purple",
-    "orange",
-    "red",
-    "yellow",
-    "green",
-    "sky",
-    "blue",
-    "brown",
-    "black"
-  ];
-
-  if(!allowedThemes.includes(theme)){
+  if(!ALLOWED_THEMES.includes(theme)){
     theme = "pink";
   }
 
@@ -1201,6 +1148,15 @@ function setTheme(theme){
   }
 }
 
+function toggleThemeMenu(){
+
+  const menu =
+    document.getElementById("themeMenu");
+
+  if(menu){
+    menu.classList.toggle("show");
+  }
+}
 
 function loadTheme(){
 
@@ -1210,7 +1166,6 @@ function loadTheme(){
   setTheme(savedTheme);
 }
 
-
 document.addEventListener(
   "DOMContentLoaded",
   function(){
@@ -1219,6 +1174,71 @@ document.addEventListener(
 
   }
 );
+
+</script>
+    <!-- =========================
+     THEME SWITCHER
+========================= -->
+
+<div class="theme-box">
+
+  <button
+    type="button"
+    class="theme-btn"
+    onclick="toggleThemeMenu()"
+  >
+    🎨 เปลี่ยนธีมสี
+  </button>
+
+  <div
+    class="theme-menu"
+    id="themeMenu"
+  >
+
+    <button type="button" onclick="setTheme('pink')">
+      🌸 ชมพู
+    </button>
+
+    <button type="button" onclick="setTheme('purple')">
+      💜 ม่วง
+    </button>
+
+    <button type="button" onclick="setTheme('orange')">
+      🧡 ส้ม
+    </button>
+
+    <button type="button" onclick="setTheme('red')">
+      ❤️ แดง
+    </button>
+
+    <button type="button" onclick="setTheme('yellow')">
+      💛 เหลือง
+    </button>
+
+    <button type="button" onclick="setTheme('green')">
+      💚 เขียว
+    </button>
+
+    <button type="button" onclick="setTheme('sky')">
+      🩵 ฟ้า
+    </button>
+
+    <button type="button" onclick="setTheme('blue')">
+      💙 น้ำเงิน
+    </button>
+
+    <button type="button" onclick="setTheme('brown')">
+      🤎 น้ำตาล
+    </button>
+
+    <button type="button" onclick="setTheme('black')">
+      🖤 ดำ
+    </button>
+
+  </div>
+
+</div>
+
 <!-- =========================
      NAV
 ========================= -->

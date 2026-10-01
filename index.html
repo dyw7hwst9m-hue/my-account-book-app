@@ -212,7 +212,7 @@ button{
 }
 
 .card{
-  background:#fff;
+  background:var(--card);
   border-radius:27px;
   padding:22px;
   margin-top:20px;
@@ -220,7 +220,7 @@ button{
 }
 
 .soft{
-  background:linear-gradient(110deg,#fceaf3,#fff);
+  background:linear-gradient(110deg,var(--soft),var(--card));
 }
 
 h1{
@@ -246,14 +246,14 @@ select{
   padding:12px 14px;
   border:1px solid var(--line);
   border-radius:16px;
-  background:#fff;
+  background:var(--card);
   color:var(--ink);
   outline:none;
 }
 
 input:focus,
 select:focus{
-  border-color:#e5b8cd;
+  border-color:var(--pink);
 }
 
 .muted{
@@ -304,13 +304,13 @@ select:focus{
 }
 
 .light{
-  background:#f4edf2;
-  color:#995c79;
+  background:var(--soft);
+  color:var(--pink);
 }
 
 .gray{
-  background:#ece8ed;
-  color:#6e6870;
+  background:var(--soft);
+  color:var(--muted);
 }
 
 .danger{

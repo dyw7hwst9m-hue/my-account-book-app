@@ -4773,22 +4773,85 @@ async function checkAuth(){
   const authScreen =
     document.getElementById("authScreen");
 
+  const message =
+    document.getElementById("authMessage");
+
   if(!session){
 
     authScreen.style.display =
       "flex";
 
-  }else{
+    return;
+  }
+
+  console.log(
+    "Logged in:",
+    session.user.email
+  );
+
+  const { data, error } =
+    await supabaseClient.rpc(
+      "get_my_access"
+    );
+
+  if(error){
+
+    console.error(
+      "GET ACCESS ERROR:",
+      error
+    );
+
+    authScreen.style.display =
+      "flex";
+
+    message.textContent =
+      "เกิดข้อผิดพลาดในการตรวจสอบสิทธิ์";
+
+    return;
+  }
+
+  console.log(
+    "ACCESS:",
+    data
+  );
+
+  if(data.status === "premium"){
 
     authScreen.style.display =
       "none";
 
     console.log(
-      "Logged in:",
-      session.user.email
+      "Premium user 🎉"
     );
 
+    return;
   }
+
+  if(data.status === "trial"){
+
+    authScreen.style.display =
+      "none";
+
+    console.log(
+      "Trial days remaining:",
+      data.days_remaining
+    );
+
+    return;
+  }
+
+  if(data.status === "expired"){
+
+    authScreen.style.display =
+      "flex";
+
+    message.innerHTML =
+      "🎁 ช่วงทดลองใช้งาน 7 วันหมดแล้ว<br>" +
+      "กรุณาซื้อ Premium เพื่อใช้งานต่อ";
+
+    return;
+  }
+
 }
 
 

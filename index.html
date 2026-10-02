@@ -4693,9 +4693,15 @@ async function signUp(){
       password: password
     });
 
-  if(error){
+    if(error){
+
+    console.error(
+      "SUPABASE SIGN UP ERROR:",
+      error
+    );
 
     message.textContent =
+      "สมัครไม่สำเร็จ: " +
       error.message;
 
     return;

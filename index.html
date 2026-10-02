@@ -4859,26 +4859,47 @@ async function checkAuth(){
   const authScreen =
     document.getElementById("authScreen");
 
+  const premiumScreen =
+    document.getElementById("premiumScreen");
+
+  const accessBanner =
+    document.getElementById("accessBanner");
+
   const message =
     document.getElementById("authMessage");
 
- if(!session){
 
-    authScreen.style.display =
-      "flex";
+  /* =========================
+     ยังไม่ได้เข้าสู่ระบบ
+  ========================= */
+
+  if(!session){
+
+    authScreen.style.display = "flex";
+
+    premiumScreen.style.display = "none";
+
+    accessBanner.style.display = "none";
 
     return;
   }
+
 
   console.log(
     "Logged in:",
     session.user.email
   );
 
+
+  /* =========================
+     ตรวจสอบสิทธิ์
+  ========================= */
+
   const { data, error } =
     await supabaseClient.rpc(
       "get_my_access"
     );
+
 
   if(error){
 
@@ -4887,8 +4908,11 @@ async function checkAuth(){
       error
     );
 
-    authScreen.style.display =
-      "flex";
+    authScreen.style.display = "flex";
+
+    premiumScreen.style.display = "none";
+
+    accessBanner.style.display = "none";
 
     message.textContent =
       "เกิดข้อผิดพลาดในการตรวจสอบสิทธิ์";
@@ -4896,46 +4920,52 @@ async function checkAuth(){
     return;
   }
 
+
   console.log(
     "ACCESS:",
     data
   );
 
-  const accessBanner =
-  document.getElementById("accessBanner");
 
-if(data.status === "premium"){
+  /* =========================
+     PREMIUM
+  ========================= */
 
-  accessBanner.style.display = "block";
-
-  accessBanner.innerHTML =
-    "👑 Premium — ใช้งานได้ตลอด";
-  
-}
-if(data.status === "trial"){
-
-  accessBanner.style.display = "block";
-
-  accessBanner.innerHTML =
-    "🎁 ทดลองใช้งานฟรี — เหลือ " +
-    data.days_remaining +
-    " วัน";
-}
   if(data.status === "premium"){
 
-    authScreen.style.display =
-      "none";
+    authScreen.style.display = "none";
+
+    premiumScreen.style.display = "none";
+
+    accessBanner.style.display = "block";
+
+    accessBanner.innerHTML =
+      "👑 Premium — ใช้งานได้ตลอด";
 
     console.log(
       "Premium user 🎉"
     );
 
     return;
- }
+  }
+
+
+  /* =========================
+     TRIAL
+  ========================= */
+
   if(data.status === "trial"){
 
-    authScreen.style.display =
-      "none";
+    authScreen.style.display = "none";
+
+    premiumScreen.style.display = "none";
+
+    accessBanner.style.display = "block";
+
+    accessBanner.innerHTML =
+      "🎁 ทดลองใช้งานฟรี — เหลือ " +
+      data.days_remaining +
+      " วัน";
 
     console.log(
       "Trial days remaining:",
@@ -4945,20 +4975,27 @@ if(data.status === "trial"){
     return;
   }
 
+
+  /* =========================
+     EXPIRED
+  ========================= */
+
   if(data.status === "expired"){
 
-    authScreen.style.display =
-      "flex";
+    authScreen.style.display = "none";
 
-    message.innerHTML =
-      "🎁 ช่วงทดลองใช้งาน 7 วันหมดแล้ว<br>" +
-      "กรุณาซื้อ Premium เพื่อใช้งานต่อ";
+    accessBanner.style.display = "none";
+
+    premiumScreen.style.display = "flex";
+
+    console.log(
+      "Trial expired — Premium required"
+    );
 
     return;
   }
 
 }
-
 
 supabaseClient.auth.onAuthStateChange(
   (event, session) => {

@@ -1193,6 +1193,79 @@ document.addEventListener(
 
 </script>
     <!-- =========================
+     AUTH SCREEN
+========================= -->
+
+<div id="authScreen" style="
+  display:none;
+  min-height:100vh;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+">
+
+  <div class="card soft" style="
+    width:100%;
+    max-width:420px;
+    padding:28px;
+  ">
+
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="font-size:48px;">📒</div>
+
+      <h1 style="margin:8px 0;">
+        สมุดบัญชี
+      </h1>
+
+      <div class="muted">
+        สมัครสมาชิกเพื่อเริ่มทดลองใช้งานฟรี 7 วัน
+      </div>
+    </div>
+
+    <input
+      id="authEmail"
+      type="email"
+      placeholder="อีเมล"
+      autocomplete="email"
+      style="width:100%;margin-bottom:12px;"
+    >
+
+    <input
+      id="authPassword"
+      type="password"
+      placeholder="รหัสผ่าน"
+      autocomplete="current-password"
+      style="width:100%;margin-bottom:16px;"
+    >
+
+    <button
+      type="button"
+      class="btn"
+      onclick="signIn()"
+      style="width:100%;"
+    >
+      🔐 เข้าสู่ระบบ
+    </button>
+
+    <button
+      type="button"
+      class="btn light"
+      onclick="signUp()"
+      style="width:100%;margin-top:10px;"
+    >
+      ✨ สมัครสมาชิก
+    </button>
+
+    <div
+      id="authMessage"
+      class="muted"
+      style="text-align:center;margin-top:16px;"
+    ></div>
+
+  </div>
+
+</div>
+    <!-- =========================
      THEME SWITCHER
 ========================= -->
 

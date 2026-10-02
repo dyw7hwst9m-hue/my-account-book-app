@@ -4656,6 +4656,157 @@ renderAll();
 
 renderMenus();
 
+async function signUp(){
+
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const message =
+    document.getElementById("authMessage");
+
+  if(!email || !password){
+    message.textContent =
+      "กรุณากรอกอีเมลและรหัสผ่าน";
+    return;
+  }
+
+  if(password.length < 6){
+    message.textContent =
+      "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+    return;
+  }
+
+  message.textContent =
+    "กำลังสมัครสมาชิก...";
+
+  const { error } =
+    await supabaseClient.auth.signUp({
+      email: email,
+      password: password
+    });
+
+  if(error){
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
+  message.textContent =
+    "สมัครสมาชิกสำเร็จ 🎉 กรุณาตรวจสอบอีเมลของคุณ";
+}
+
+
+async function signIn(){
+
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const message =
+    document.getElementById("authMessage");
+
+  if(!email || !password){
+
+    message.textContent =
+      "กรุณากรอกอีเมลและรหัสผ่าน";
+
+    return;
+  }
+
+  message.textContent =
+    "กำลังเข้าสู่ระบบ...";
+
+  const { error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+  if(error){
+
+    message.textContent =
+      "เข้าสู่ระบบไม่สำเร็จ: " +
+      error.message;
+
+    return;
+  }
+
+  message.textContent =
+    "เข้าสู่ระบบสำเร็จ 🎉";
+
+  await checkAuth();
+}
+
+
+async function checkAuth(){
+
+  const {
+    data: { session }
+  } =
+    await supabaseClient.auth.getSession();
+
+  const authScreen =
+    document.getElementById("authScreen");
+
+  if(!session){
+
+    authScreen.style.display =
+      "flex";
+
+  }else{
+
+    authScreen.style.display =
+      "none";
+
+    console.log(
+      "Logged in:",
+      session.user.email
+    );
+
+  }
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+  (event, session) => {
+
+    const authScreen =
+      document.getElementById("authScreen");
+
+    if(!authScreen)return;
+
+    if(session){
+
+      authScreen.style.display =
+        "none";
+
+    }else{
+
+      authScreen.style.display =
+        "flex";
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    checkAuth();
+
+  }
+);
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js")

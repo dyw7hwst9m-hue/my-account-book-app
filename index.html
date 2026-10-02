@@ -1274,10 +1274,23 @@ document.addEventListener(
       style="text-align:center;margin-top:16px;"
     ></div>
 
-  </div>
+    </div>
 
 </div>
-    <!-- =========================
+
+<div id="accessBanner" style="
+  display:none;
+  margin:12px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:var(--card);
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+  text-align:center;
+  font-weight:700;
+">
+</div>
+
+<!-- =========================
      THEME SWITCHER
 ========================= -->
 
@@ -4776,7 +4789,7 @@ async function checkAuth(){
   const message =
     document.getElementById("authMessage");
 
-  if(!session){
+ if(!session){
 
     authScreen.style.display =
       "flex";
@@ -4815,8 +4828,26 @@ async function checkAuth(){
     data
   );
 
-  alert(JSON.stringify(data));
+  const accessBanner =
+  document.getElementById("accessBanner");
 
+if(data.status === "premium"){
+
+  accessBanner.style.display = "block";
+
+  accessBanner.innerHTML =
+    "👑 Premium — ใช้งานได้ตลอด";
+  
+}
+if(data.status === "trial"){
+
+  accessBanner.style.display = "block";
+
+  accessBanner.innerHTML =
+    "🎁 ทดลองใช้งานฟรี — เหลือ " +
+    data.days_remaining +
+    " วัน";
+}
   if(data.status === "premium"){
 
     authScreen.style.display =
@@ -4827,8 +4858,7 @@ async function checkAuth(){
     );
 
     return;
-  }
-
+ }
   if(data.status === "trial"){
 
     authScreen.style.display =

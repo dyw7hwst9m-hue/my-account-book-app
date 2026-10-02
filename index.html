@@ -1198,10 +1198,15 @@ document.addEventListener(
 
 <div id="authScreen" style="
   display:none;
+  position:fixed;
+  inset:0;
+  z-index:99999;
   min-height:100vh;
   align-items:center;
   justify-content:center;
   padding:24px;
+  background:var(--bg);
+  overflow:auto;
 ">
 
   <div class="card soft" style="

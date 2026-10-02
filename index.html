@@ -1083,7 +1083,8 @@ select:focus{
   background:var(--pink2);
 }  
 </style>
-  <link rel="manifest" href="./manifest.json">
+
+<link rel="manifest" href="./manifest.json">
 
 <meta name="theme-color" content="#ca6492">
 
@@ -1092,7 +1093,22 @@ select:focus{
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="สมุดบัญชี">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://znavxtnvubiphhegnzto.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_CAXGYKKSBsHPzpoehkAIBw_6PNmPw0r";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
+
 </head>
+
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

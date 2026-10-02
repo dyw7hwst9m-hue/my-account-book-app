@@ -5036,48 +5036,8 @@ async function startPremiumPurchase(){
     document.getElementById("premiumMessage");
 
   message.textContent =
-    "กำลังตรวจสอบ...";
+    "ระบบชำระเงินจริงกำลังเตรียมเชื่อมต่อ 💎";
 
-  const {
-    data: { session }
-  } =
-    await supabaseClient.auth.getSession();
-
-  if(!session){
-
-    message.textContent =
-      "กรุณาเข้าสู่ระบบก่อน";
-
-    return;
-  }
-
-  const { data, error } =
-    await supabaseClient.rpc(
-      "test_activate_premium"
-    );
-
-  if(error){
-
-    console.error(
-      "TEST PREMIUM ERROR:",
-      error
-    );
-
-    message.textContent =
-      "ทดสอบ Premium ไม่สำเร็จ";
-
-    return;
-  }
-
-  console.log(
-    "TEST PREMIUM:",
-    data
-  );
-
-  message.textContent =
-    "เปิด Premium สำเร็จ 🎉";
-
-  await checkAuth();
 }
 
 async function signOut(){

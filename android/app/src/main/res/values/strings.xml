@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">สมุดบัญชี</string>
+    <string name="app_name">บันทึกบัญชีง่ายง่าย/Income Expenses by Mukz</string>
     <string name="title_activity_main">สมุดบัญชี</string>
     <string name="package_name">com.myaccountbook.app</string>
     <string name="custom_url_scheme">com.myaccountbook.app</string>

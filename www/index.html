@@ -5070,12 +5070,25 @@ function openPremiumScreen(){
   screen.style.display = "flex";
 }
   
-function startPremiumPurchase(){
+async function startPremiumPurchase() {
+  const { data, error } = await supabaseClient.functions.invoke(
+    "create-checkout",
+    {
+      method: "POST"
+    }
+  );
 
-  const stripePaymentLink =
-    "https://buy.stripe.com/test_4gM00lgll0FQ1Iwfb5ebu00";
+  if (error) {
+    alert("เปิดหน้าชำระเงินไม่สำเร็จ");
+    console.error(error);
+    return;
+  }
 
-  window.location.href = stripePaymentLink;
+  if (data?.url) {
+    window.location.href = data.url;
+  } else {
+    alert("ไม่พบหน้าชำระเงิน");
+  }
 }
 
 async function signOut(){

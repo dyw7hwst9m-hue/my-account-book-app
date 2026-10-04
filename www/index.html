@@ -4980,24 +4980,29 @@ async function checkAuth(){
 
   if(data.status === "trial"){
 
-    authScreen.style.display = "none";
+  authScreen.style.display = "none";
+  premiumScreen.style.display = "none";
+  accessBanner.style.display = "block";
 
-    premiumScreen.style.display = "none";
+  accessBanner.innerHTML =
+    "🎁 ทดลองใช้งานฟรี — เหลือ " +
+    data.days_remaining +
+    " วัน<br>" +
+    "<span style='font-size:12px;'>แตะเพื่อดู Premium 149 บาท</span>";
 
-    accessBanner.style.display = "block";
+  accessBanner.style.cursor = "pointer";
 
-    accessBanner.innerHTML =
-      "🎁 ทดลองใช้งานฟรี — เหลือ " +
-      data.days_remaining +
-      " วัน";
+  accessBanner.onclick = function(){
+    premiumScreen.style.display = "flex";
+  };
 
-    console.log(
-      "Trial days remaining:",
-      data.days_remaining
-    );
+  console.log(
+    "Trial days remaining:",
+    data.days_remaining
+  );
 
-    return;
-  }
+  return;
+    }
 
 
   /* =========================

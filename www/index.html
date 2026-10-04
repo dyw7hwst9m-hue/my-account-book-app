@@ -5054,14 +5054,12 @@ document.addEventListener(
   }
 );
 
-async function startPremiumPurchase(){
+function startPremiumPurchase(){
 
-  const message =
-    document.getElementById("premiumMessage");
+  const stripePaymentLink =
+    "https://buy.stripe.com/test_4gM00lgll0FQ1Iwfb5ebu00";
 
-  message.textContent =
-    "ระบบชำระเงินจริงกำลังเตรียมเชื่อมต่อ 💎";
-
+  window.location.href = stripePaymentLink;
 }
 
 async function signOut(){

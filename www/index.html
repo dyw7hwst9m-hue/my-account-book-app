@@ -5069,14 +5069,15 @@ function openPremiumScreen(){
 
   screen.style.display = "flex";
 }
-  
-async function startPremiumPurchase() {
-  const { data, error } = await supabaseClient.functions.invoke(
-    "create-checkout",
-    {
-      method: "POST"
-    }
-  );
+  async function startPremiumPurchase() {
+
+  const { data, error } =
+    await supabaseClient.functions.invoke(
+      "create-checkout",
+      {
+        body: {}
+      }
+    );
 
   if (error) {
     alert("เปิดหน้าชำระเงินไม่สำเร็จ");
@@ -5090,7 +5091,7 @@ async function startPremiumPurchase() {
     alert("ไม่พบหน้าชำระเงิน");
   }
 }
-
+  
 async function signOut(){
 
   const { error } =

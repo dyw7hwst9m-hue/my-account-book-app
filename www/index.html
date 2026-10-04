@@ -4981,17 +4981,18 @@ async function checkAuth(){
   if(data.status === "trial"){
 
   authScreen.style.display = "none";
-  premiumScreen.style.display = "none";
+
   accessBanner.style.display = "block";
 
   accessBanner.innerHTML =
-  "🎁 ทดลองใช้งานฟรี — เหลือ " +
-  data.days_remaining +
-  " วัน<br><br>" +
-  "<button type='button' class='btn' " +
-  "onclick=\"document.getElementById('premiumScreen').style.display='flex'\">" +
-  "👑 ดู Premium 149 บาท" +
-  "</button>";
+    "🎁 ทดลองใช้งานฟรี — เหลือ " +
+    data.days_remaining +
+    " วัน<br>" +
+    "<button type='button' class='btn' " +
+    "style='margin-top:8px;' " +
+    "onclick='showPremium()'>" +
+    "👑 ดู Premium 149 บาท" +
+    "</button>";
 
   console.log(
     "Trial days remaining:",
@@ -4999,7 +5000,7 @@ async function checkAuth(){
   );
 
   return;
-    }
+}
 
 
   /* =========================

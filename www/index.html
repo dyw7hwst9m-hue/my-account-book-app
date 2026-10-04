@@ -4987,12 +4987,9 @@ async function checkAuth(){
   accessBanner.innerHTML =
   "🎁 ทดลองใช้งานฟรี — เหลือ " +
   data.days_remaining +
-  " วัน<br>" +
-  "<button type='button' " +
-  "style='margin-top:8px;border:0;border-radius:12px;" +
-  "padding:10px 18px;background:var(--pink);color:white;" +
-  "font-weight:700;cursor:pointer;' " +
-  "onclick='openPremiumScreen()'>" +
+  " วัน<br><br>" +
+  "<button type='button' class='btn' " +
+  "onclick=\"document.getElementById('premiumScreen').style.display='flex'\">" +
   "👑 ดู Premium 149 บาท" +
   "</button>";
 
